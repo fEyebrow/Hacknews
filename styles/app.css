@@ -1,19 +1,3 @@
-/**
- *
- * Copyright 2015 Google Inc. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 * {
   box-sizing: border-box;
 }
@@ -73,6 +57,7 @@ a {
 .header__title-wrapper {
   position: absolute;
   bottom: 16px;
+  will-change: transform;
   -webkit-transform-origin: 0 100%;
           transform-origin: 0 100%;
 }
@@ -92,20 +77,8 @@ a {
   opacity: 0.54;
 }
 
-body.details-active .story__title,
-body.details-active .story__by,
-body.details-active .story__score {
-  transition: opacity 0.5s ease-out;
-  opacity: 0 !important;
-}
-
-body.details-active .story {
-  background: linear-gradient(to bottom, #FFF 0%, #FFF 100%);
-}
-
 body.raised .header {
-  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16),
-      0px 2px 5px 0px rgba(0, 0, 0, 0.23);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.23);
 }
 
 main {
@@ -199,8 +172,6 @@ main.loading {
   line-height: 40px;
 
   box-shadow:
-      0px 2px 5px 0px rgba(0, 0, 0, 0.06),
-      0px 2px 5px 0px rgba(0, 0, 0, 0.08),
       0px 2px 7px 0px rgba(0, 0, 0, 0.10);
 }
 
@@ -224,7 +195,6 @@ main.loading {
       -webkit-align-content: stretch;
           align-content: stretch;
 
-  opacity: 0;
   position: fixed;
   top: 0;
   left: 100%;
@@ -233,17 +203,11 @@ main.loading {
   background: white;
   z-index: 2;
   box-shadow:
-      0px 2px 5px 0px rgba(0, 0, 0, 0.06),
-      0px 2px 5px 0px rgba(0, 0, 0, 0.08),
       0px 2px 7px 0px rgba(0, 0, 0, 0.10);
 
   overflow: hidden;
-  transition: opacity 0.3s ease-out;
-}
-
-.story-details * {
+  transition: transform 0.3s;
   will-change: transform;
-  transform: translateZ(0);
 }
 
 .story-details__content {
@@ -256,6 +220,14 @@ main.loading {
   -webkit-overflow-scrolling: touch;
 
   padding: 0 16px 72px 72px;
+}
+
+.story-details.visible {
+  transform: translateX(-100vw);
+}
+
+.story-details.hidden {
+  transform: translateX(0);
 }
 
 .story-details__title {
